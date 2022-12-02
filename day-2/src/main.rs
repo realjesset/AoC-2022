@@ -5,10 +5,9 @@ use std::error::Error;
 fn main() -> Result<(), Box<dyn Error>> {
     let input = get_input_from_file("src/input.txt");
     let games = parse_input(&input);
-    part_one(&games);
 
-    // println!("Part one: {}", part_one(&parsed));
-    // println!("Part two: {}", part_two(&parsed));
+    println!("Part one: {}", part_one(&games));
+    println!("Part two: {}", part_two(&games));
 
     Ok(())
 }
