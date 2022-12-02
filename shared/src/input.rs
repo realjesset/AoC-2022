@@ -14,5 +14,5 @@ pub fn get_input_text_from_file<R: Read>(mut input: R) -> String {
 }
 
 pub fn get_file_buffer(path: &str) -> BufReader<File> {
-    return BufReader::new(File::open(&path).expect(&format!("file not foo: {}", path)));
+    return BufReader::new(File::open(&path).expect(&format!("file not found at '{}'", path)));
 }
