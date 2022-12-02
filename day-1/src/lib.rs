@@ -29,23 +29,22 @@ pub fn parse_input(input: &str) -> Result<Vec<Vec<u64>>, Box<dyn Error>> {
     Ok(elves_calories)
 }
 
+fn sum_calories<'a>(calories: &'a Vec<Vec<u64>>) -> Box<dyn Iterator<Item = u64> + 'a> {
+    Box::new(calories.iter().map(|elf| elf.iter().sum::<u64>()))
+}
+
 pub fn part_one(input: &Vec<Vec<u64>>) -> u64 {
-    input
-        .iter()
-        .map(|elf| elf.iter().sum::<u64>())
-        .max()
-        .unwrap_or(0)
+    sum_calories(input).max().unwrap_or(0)
 }
 
 pub fn part_two(input: &Vec<Vec<u64>>) -> u64 {
-    let mut sorted = vec![];
+    // get sum
+    let sum = sum_calories(input);
 
-    // sum the input and push to top_three_elves
-    for elf in input {
-        sorted.push(elf.iter().sum::<u64>());
-    }
-
+    // sort sum of elves' calories
+    let mut sorted = sum.collect::<Vec<u64>>();
     sorted.sort();
 
-    sorted[sorted.len() - 3..].iter().sum()
+    // get sum of top 3 calories
+    sorted[sorted.len() - 3..].iter().sum::<u64>()
 }
